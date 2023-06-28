@@ -17,7 +17,7 @@ public class main {
 		jogadorDAO jogadorDao = new jogadorDAO();
 		Jogo jogo = new Jogo();
 		jogoDAO jogoDao = new jogoDAO();
-		String menu = "\n\n1-Cadastrar Jogador\n2-Atualizar Jogador\n3-Apagar Jogador\n4-Listar Jogadores\n5-Cadastrar Jogo\n6-Listar Jogo\n7-Atulizar Jogo\n8-Deletar Jogon\n9-Listar Jogador\n\nDigite 0 para Sair\n";
+		String menu = "\n\n1-Cadastrar Jogador\n2-Atualizar Jogador\n3-Apagar Jogador\n4-Listar Jogadores\n5-Cadastrar Jogo\n6-Listar Jogo\n7-Atulizar Jogo\n8-Deletar Jogo\n9-Listar Jogador\n10-Listar Jogo\nDigite 0 para Sair\n";
 		
 		int op;
 		
