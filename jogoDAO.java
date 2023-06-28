@@ -131,4 +131,42 @@ public class jogoDAO {
 
 
 	}
+	
+	public static List<Jogo> getJogoid(int id){
+		
+		String sql = "SELECT * FROM jogo WHERE id = ?";
+		
+		List<Jogo> jogoid = new ArrayList<Jogo>();
+		
+		Connection conn = null;
+		PreparedStatement pstm =null;
+		ResultSet rset = null;
+		
+		try {
+			conn = ConnectionFactory.ObtemConexao();
+			pstm = conn.prepareStatement(sql);
+			pstm.setInt(1, id);
+			rset = pstm.executeQuery();
+			
+			
+			while (rset.next()){
+				Jogo jogo_id = new Jogo();
+				
+				jogo_id.setNome_jogo(rset.getString("nome"));
+				jogo_id.setTema(rset.getString("tema"));
+				jogo_id.setPontMax(rset.getInt("pontMax"));
+				
+				jogoid.add(jogo_id);
+				
+				}
+			}
+			
+			catch (Exception e) {
+				e.printStackTrace();
+				
+			}
+		
+		return jogoid;
+	}
+
 }
