@@ -74,7 +74,9 @@ public class jogadorDAO {
 		try {
 			conn = ConnectionFactory.ObtemConexao();
 			pstm = conn.prepareStatement(sql);
+			
 			// Valores para atualizar
+			
 			pstm.setString(1, jogador.getNome());
 			pstm.setString(2, jogador.getNickname());
 			pstm.setInt(3, jogador.getId());
@@ -120,6 +122,42 @@ public class jogadorDAO {
 			e.printStackTrace();
 		}
 		
+		
+	}
+	
+	public static List<Jogador> getJogadorid(int id){
+		
+		String sql = "SELECT * FROM jogador WHERE id = ?";
+		
+		List<Jogador> jogadorid = new ArrayList<Jogador>();
+		
+		Connection conn = null;
+		PreparedStatement pstm =null;
+		ResultSet rset = null;
+		
+		try {
+			conn = ConnectionFactory.ObtemConexao();
+			pstm = conn.prepareStatement(sql);
+			pstm.setInt(1, id);
+			rset = pstm.executeQuery();
+			
+			
+			while (rset.next()){
+				Jogador jogador_id = new Jogador();
+				
+				jogador_id.setNome(rset.getString("nome"));
+				jogador_id.setNickname(rset.getString("nickname"));
+				jogadorid.add(jogador_id);
+				
+				}
+			}
+			
+			catch (Exception e) {
+				e.printStackTrace();
+				
+			}
+		
+		return jogadorid;
 		
 	}
 }
