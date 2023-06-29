@@ -24,8 +24,7 @@ public class jogadorDAO {
 			
 			pstm.setString(1, jogador.getNome());
 			pstm.setString(2, jogador.getNickname());
-			pstm.execute();
-					
+			pstm.execute();				
 		}
 		
 		catch(Exception e) {
@@ -40,7 +39,7 @@ public class jogadorDAO {
 		List <Jogador> jogadores = new ArrayList<Jogador>();
 		Connection conn = null;
 		PreparedStatement pstm =null;
-		// Recupera os dados do banco **Select**
+		// RECUPERA DADOS DO BANCO
 		ResultSet rset = null;
 		try {
 			conn = ConnectionFactory.ObtemConexao();
@@ -75,7 +74,7 @@ public class jogadorDAO {
 			conn = ConnectionFactory.ObtemConexao();
 			pstm = conn.prepareStatement(sql);
 			
-			// Valores para atualizar
+			// VALORES PARA ATUALIZAR
 			
 			pstm.setString(1, jogador.getNome());
 			pstm.setString(2, jogador.getNickname());
@@ -160,6 +159,7 @@ public class jogadorDAO {
 		return jogadorid;
 		
 	}
+
 }
 
 	

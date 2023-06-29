@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import db_pessoas.ConnectionFactory;
-import sublime_main.Jogador;
 import sublime_main.Jogo;
 
 public class jogoDAO {
@@ -30,6 +29,7 @@ public class jogoDAO {
 		
 		catch(Exception e) {
 			e.printStackTrace();
+			System.out.println("Inválido");
 			
 		}
 	}
@@ -40,22 +40,21 @@ public class jogoDAO {
 	
 	List <Jogo> jogo = new ArrayList<Jogo>();
 	Connection conn = null;
-	PreparedStatement pstm =null;
-	
-	// Recupera os dados do banco **Select**
-	
+	PreparedStatement pstm =null;	
+	// RECUPERA OS DADOS DO BANCO
 	ResultSet rset = null;
+	
 	try {
 		conn = ConnectionFactory.ObtemConexao();
 		pstm = conn.prepareStatement(sql);
-		rset = pstm.executeQuery();		
+		rset = pstm.executeQuery();	
+		
 		while (rset.next()){
 			Jogo jogo_select = new Jogo();
 			
 			jogo_select.setNome_jogo(rset.getString("nome"));
 			jogo_select.setTema(rset.getString("tema"));
-			jogo_select.setPontMax(rset.getInt("pontMax"));
-			
+			jogo_select.setPontMax(rset.getInt("pontMax"));			
 			jogo.add(jogo_select);
 			
 			}
@@ -80,13 +79,12 @@ public class jogoDAO {
 			conn = ConnectionFactory.ObtemConexao();
 			pstm = conn.prepareStatement(sql);
 			
-			// Valores para atualizar
+			// VALORES PARA ATUALIZAR
 			
 			pstm.setString(1, jogo.getNome_jogo());
 			pstm.setString(2, jogo.getTema());
 			pstm.setInt(3, jogo.getPontMax());
 			pstm.setInt(4, jogo.getId());
-
 			pstm.execute();
 
 		}
@@ -119,7 +117,6 @@ public class jogoDAO {
 		try {
 			conn = ConnectionFactory.ObtemConexao();
 			pstm = conn.prepareStatement(sql);
-			
 			pstm.setInt(1, id);
 			pstm.execute();
 			
@@ -128,11 +125,10 @@ public class jogoDAO {
 			e.printStackTrace();
 		}
 
-
-
 	}
 	
-	public static List<Jogo> getJogoid(int id){
+	
+	public static List<Jogo> getJogoid(Integer busca_id_jogo2){
 		
 		String sql = "SELECT * FROM jogo WHERE id = ?";
 		
@@ -145,7 +141,7 @@ public class jogoDAO {
 		try {
 			conn = ConnectionFactory.ObtemConexao();
 			pstm = conn.prepareStatement(sql);
-			pstm.setInt(1, id);
+			pstm.setInt(1, busca_id_jogo2);
 			rset = pstm.executeQuery();
 			
 			
@@ -155,9 +151,7 @@ public class jogoDAO {
 				jogo_id.setNome_jogo(rset.getString("nome"));
 				jogo_id.setTema(rset.getString("tema"));
 				jogo_id.setPontMax(rset.getInt("pontMax"));
-				
 				jogoid.add(jogo_id);
-				
 				}
 			}
 			

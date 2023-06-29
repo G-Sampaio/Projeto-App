@@ -12,8 +12,8 @@ import sublime_main.pontuacao;
 
 public class pontuacaoDAO {
 	
-	public void salvar_pontuacao (pontuacao Pontuacao) {
-		String sql = "INSERT INTO pontuacao(pontuacao) VALUES (?)";
+	public static void salvar_pontuacao (pontuacao Pontuacao) {
+		String sql = "insert into pontuacao (nomejgr, nomejg, pontuacao) values (?, ?, ?)";
 		
 		Connection conn = null;	
 		PreparedStatement pstm = null;
@@ -23,7 +23,9 @@ public class pontuacaoDAO {
 			conn = ConnectionFactory.ObtemConexao();
 			pstm = conn.prepareStatement(sql);
 			
-			pstm.setString(1, Pontuacao.getInserir_pontuacao());
+			pstm.setString(1, Pontuacao.getNome_jgr());
+			pstm.setString(2, Pontuacao.getNome_jg());
+			pstm.setString(3, Pontuacao.getInserir_pontuacao());
 			pstm.execute();
 					
 		}
@@ -61,18 +63,20 @@ public class pontuacaoDAO {
 	        while (rset.next()) {
 	        	pontuacao Pontuacao = new pontuacao();
 
-	            Pontuacao.setInserir_pontuacao(rset.getString("pontuacao"));
+	            Pontuacao.setMostrar_pontuacao(rset.getString("pontuacao"));
 	            pontuacoes.add(Pontuacao);
 	        }
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
-		return pontuacoes;
+		return pontuacoes;		
 			
-
-				
-			}
 		}
-		
 	
 }
+		
+		
+	
+	
+	
+	
