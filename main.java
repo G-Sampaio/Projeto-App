@@ -2,9 +2,12 @@ package aplicacao;
 
 import sublime_main.Jogador;
 import sublime_main.Jogo;
+import sublime_main.pontuacao;
 import sublimeDAO.jogadorDAO;
 import sublimeDAO.jogoDAO;
+import sublimeDAO.pontuacaoDAO;
 
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -17,7 +20,7 @@ public class main {
 		jogadorDAO jogadorDao = new jogadorDAO();
 		Jogo jogo = new Jogo();
 		jogoDAO jogoDao = new jogoDAO();
-		String menu = "\n\n1-Cadastrar Jogador\n2-Atualizar Jogador\n3-Apagar Jogador\n4-Listar Jogadores\n5-Cadastrar Jogo\n6-Listar Jogo\n7-Atulizar Jogo\n8-Deletar Jogo\n9-Listar Jogador\n10-Listar Jogo\nDigite 0 para Sair\n";
+		String menu = "\n\n1-Cadastrar Jogador\n2-Atualizar Jogador\n3-Apagar Jogador\n4-Listar Jogadores\n5-Cadastrar Jogo\n6-Listar Jogo\n7-Atulizar Jogo\n8-Deletar Jogo\n9-Listar Jogador\n10-Listar Jogo especificon\n11-Verificar Pontuação de Jogador\nDigite 0 para Sair\n";
 		
 		int op;
 		
@@ -175,6 +178,55 @@ public class main {
 				
 			break;
 			
+			case 11:
+			    
+				//System.out.print("DIGITE O JOGO QUE DESEJA VER: ");
+			    //Integer busca_id_jogo2 = Integer.parseInt(input.nextLine());
+
+			    //System.out.print("DIGITE O JOGADOR QUE DESEJA VER: ");
+			    //Integer busca_id2 = Integer.parseInt(input.nextLine());
+			    
+			    
+
+			    //List<Jogo> jogos = jogoDAO.getJogoid(busca_id_jogo2);
+			    
+			   // List<Jogador> jogadores = jogadorDAO.getJogadorid(busca_id2);
+				System.out.print("DIGITE O JOGO QUE DESEJA VER: ");
+				String nome_jg = (input.nextLine());
+				System.out.print("DIGITE O JOGADOR QUE DESEJA VER: ");
+				String nome_jgr = (input.nextLine());
+			    
+				List<pontuacao> pontuacoes = pontuacaoDAO.getMostrarPontuacao(nome_jgr, nome_jg);
+
+			    //for (Jogo jogo2 : jogos) {
+			        //System.out.printf("\nJogo: " + jogo2.getNome_jogo() + " || Tema: " + jogo2.getTema());
+			   // }
+
+			   // for (Jogador jogador2 : jogadores) {
+			       // System.out.printf("\nJogador: " + jogador2.getNome());
+			        //System.out.printf("\n");
+			       // System.out.printf("\n");
+			   //}
+
+			    for (pontuacao pontuacao : pontuacoes) {
+			    	
+			        System.out.printf("\nPontuacao: " + pontuacao.getInserir_pontuacao());
+			        System.out.printf("\n");
+			        System.out.printf("\n");
+			        
+			    }
+
+			    break;
+
+		
+			
+			
+			
+			case 12:
+				
+			break;
+				
+			
 			default:
 				System.out.println(" Você optou para Sair ou Digitou uma opção inválida! ");		
 			}
@@ -183,4 +235,5 @@ public class main {
 			}while (op != 0);
 			
 		}
+}
 }
